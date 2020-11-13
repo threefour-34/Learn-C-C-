@@ -48,6 +48,23 @@
   * 十六进制%x %X,显示前缀%#x(0x),%#X(0X)
   * 转换说明修饰符
     * 例 int a=100; printf("*a=%10d*\n")  * (这里有7个空格)100 * PS(一共10位,默认左边补空格,若为-10,则输出* 100(这里有7个空格) *)
+    * * %*d 通过程序指定字段宽度
+    * int width=8; int number=222.2; int precision=3;
+    * printf("the number is:%*.*d:\n",width,precision,number);
+    * 222.200
+* scanf()
+  * &
+  * 数字表示最大字段宽度
+    * "%10s"
+  * %hhd/%hhu 将整数作为signed char/unsigned char
+  * **转换说明**
+  * 例 %d 每次读取一个字符，跳过所有空白字符，直至遇到第一个非空白字符才开始读取;但是若使用字段宽度，scanf会在字段结尾或者第一个非空白字符处停止读取;若第一个非空格字符为A,则无法读取;C规定在第一个出错处就停止读取输入
+  * %s 读取除了空格之外的所有字符
+  * %c 
+    * 若为scanf("%c",  &ch) 则从输入的第一个字符开始   
+    * 若为scanf("%c",&ch) 则从第一个非空白字符开始读取
+  * %*d 跳过相应项
+    * scanf("%\*d%\*d%d",&a);//跳过输入的前两个整数.
 * constant/variable 常量/变量
 * variable
   * 存储方式不同
@@ -79,6 +96,12 @@
    * float_Imaginary,double_Imaginary,long double_Imaginary
  * sizeof()以字节为单位给出类型的大小
 * auto/register/static/extern
+* 表示字符常量
+  * \101 101为八进制数(最长原则)
+  * \x41 41为十六进制数  \xhh……
+  * 直接用字符A 
+  * char str[]="salal\10a\1s11\111"
+* 整数除法损失小数部分
 
 ***
 
@@ -91,7 +114,7 @@
     * 'x' char类型
     * "x" char数组 'x'和'\0'
 * '\0' 空字符 null character 非打印字符
-* scanf()不读取空格
+* scanf()不读取空格,且不要加&
 
 ## CONSTANT
 * #define指令
@@ -107,6 +130,15 @@ ___
 
 ## OTHERS
 * #ifdef 和 #endif
+* 用异或交换整数ab的值
+  * int a=10;int b=11;
+  * a=a^b;
+  * b=a^b;
+  * a=a^b;
+* 不创建临时变量交换两个数的值
+  * a=a+b;
+  * b=a-b;
+  * a=a-b;
 
 
 # 2020.11.11 PAGE217
