@@ -113,8 +113,22 @@
 ***
 
 ## 字符串
-* strlen()函数
+* strlen()函数 数组中(内容)字符的个数
   * string.h 头文件
+  * 其他函数
+    * strcmp(string1，string2)函数 比较两个数组是否相同 相同返回0 不同时给出第一个不同字符的ASCII码的差值
+    * strcpy(string1，string2)函数，将string2拷贝到string1，并且返回string1 \*其中string1和string2不重叠
+      * 套路 复制一个字符串 char \*dst=(char\*)malloc(strlen(src)**+1**);strcpy(dst,src);//动态内存分布时加1是因为\0.
+    * char\*strchr(const char*s,int c)查找某个字符第一次出现的次序，找不到就返回NULL,找到了就**返回**一个指向那个字符的**指针**
+      * 套路 找第二个字符 char string[]="hellololo";char \*p=strchr(string,'l');p=strchr(p+1,'l');
+      * 打印*p所指的字符前面的字符串(即在上一个例子中输出he)  char string[]="hellololo";  
+  char \*p=strchr(string,'l');  
+  char c=\*p;  
+  \*p='\0';  
+  printf("%s",string);  
+  \*p=c; //将string改回来
+      * strstr()函数 字符串中查找字符串
+      * strcasestr()函数 查找字符串但是忽略字母大小写
 * sizeof(string)/sizeof(string[0]) ??不知道是否可以正确算出 char string[100]="hello array";
 * 用字符型数组储存字符串
 * "" 双引号
@@ -123,10 +137,8 @@
     * "x" char数组 'x'和'\0'
 * '\0' 空字符 null character 非打印字符
 * scanf()不读取空格,且不要加&
-
-
-
-
+* 字符串数组 char**a 指向指针2的指针1，然后指针2指向数组
+* char a[][]  或者char *a[] 这两个不一样
 
 ## 数组
 * 函数参数表中的数组实际上使指针 void swap(int a[]) 【单个[] *也可】 (函数原型)等价于 void swap(int *a) 可以用a[i]
@@ -158,6 +170,42 @@ p=p+1;往后移一位
   * int *p=&i;void *q=(void *)p;//这不改变p所指变量的类型
 
 ## 动态内存分布
+* *example* int n;scanf("%d",&n);int\*arr;arr=(int\*)malloc(n\* sizeof(int)); //分配n\*sizeof(int)给数组arr
+* 记得一定要在合适的地方free(arr);可以free(NULL);但是不能重复free
+
+## enumeration
+用枚举而不是定义独立的const int变量  
+enum 枚举类型名字{名字0，名字1……名字n} //都是int常量，数值分别为0~n 也可以指定值 名字1=8,后面的就依次加1  
+* 套路——自动计数(需要遍历所有枚举量时)
+  * enum colors{red,green,white,numcolors};  
+  char *arr[numcolors]={……};
+
+## struct 结构体
+1. struct DATE{int month;int year; int day;}**;**
+2. struct {int x;int y;} p1,p2; //结构体没有名字，只不过定义了p1,p1这两个变量，变量类型为自定义的结构体
+3. struct point{int x;int y;} p1,p2; //定义结构体的同时创建两个变量
+
+若放在main函数中，则只能在函数内部使用;若放在main函数外面，(即与函数相同地位)则可以被多个main函数使用  
+**类型为 struct DATE而不是DATE**  
+struct DATE today={按顺序依次赋值};//或者不按顺序直接.year=……，.month=……；    
+today.year=……；
+today.day=……；
+
+结构体数组  
+struct DATE dates[100]={{ },{ }};  
+
+指向结构体指针 struct DATE *p=&today;  
+(*p).month=12;  
+或者 p->month=12; //PS:只有指针能够用->,其他变量名只能用.
+
+## 自定义数据类型
+1. 例：typedef int length;//使length成为int的别名  
+length a,b,len;
+2. 简化结构体(省去struct)
+typedef struct DATE { int month;int year;int day} Date; //可以用Date代替struct DATE(别名)
+
+## union联合
+
 
 
 ## CONSTANT
@@ -183,8 +231,7 @@ ___
   * a=a+b;
   * b=a-b;
   * a=a-b;
+* ACLLib
+  * 写Windows应用程序
 
 
-# 2020.11.11 PAGE217
-# 2020.11.13 PAGE263
-# 2020.11.25 PAGE
